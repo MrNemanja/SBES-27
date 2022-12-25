@@ -1,0 +1,10 @@
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\bin\Debug\Client.exe.config
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\bin\Debug\Client.exe
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\bin\Debug\Client.pdb
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\bin\Debug\Contract.dll
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\bin\Debug\Contract.pdb
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\obj\Debug\Client.csproj.CopyComplete
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\obj\Debug\Client.exe
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\obj\Debug\Client.pdb
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Client\obj\Debug\Client.csproj.AssemblyReference.cache

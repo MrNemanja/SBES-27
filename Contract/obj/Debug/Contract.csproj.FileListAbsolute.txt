@@ -1,0 +1,6 @@
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\bin\Debug\Contract.dll
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\bin\Debug\Contract.pdb
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.csproj.AssemblyReference.cache
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.csproj.CoreCompileInputs.cache
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.dll
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.pdb

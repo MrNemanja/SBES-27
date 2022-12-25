@@ -1,0 +1,10 @@
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\bin\Debug\Service.exe.config
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\bin\Debug\Service.exe
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\bin\Debug\Service.pdb
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\bin\Debug\Contract.dll
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\bin\Debug\Contract.pdb
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\obj\Debug\Service.csproj.AssemblyReference.cache
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\obj\Debug\Service.csproj.CopyComplete
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\obj\Debug\Service.exe
+C:\Users\Nebojsa\source\repos\DatabaseManagement\Service\obj\Debug\Service.pdb
