@@ -20,5 +20,10 @@ namespace Contract
         [OperationContract]
         string Write(string DatabaseName, string region, string grad, int godina, int potrosnja);
 
+        [OperationContract]
+        String ArchiveDatabases(String DatabaseName);
+
+        [OperationContract]
+        String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja);
     }
 }
