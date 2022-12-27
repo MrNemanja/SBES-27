@@ -35,8 +35,6 @@ namespace Client
                Console.WriteLine(follower);
                follower = proxy.CreateDatabase("Baza1.txt");
                Console.WriteLine(follower);
-               follower = proxy.DeleteDatabase("Baza2.txt");
-               Console.WriteLine(follower);
 
                follower = proxy.Write("Baza1.txt","Backa","Novi Sad",2022,400);
                Console.WriteLine(follower);
@@ -49,9 +47,23 @@ namespace Client
                follower = proxy.Write("Baza.txt", "sss", "asda", 2022, 0);
                Console.WriteLine(follower);
 
-               follower = proxy.Read("Baza1.txt", "Backa", "Novi Sad");
+               follower = proxy.Write("Baza2.txt", "Sumadija", "Lazarevac", 2022, 1500);
                Console.WriteLine(follower);
-               follower = proxy.Read("Baza.txt", "ss", "ss");
+               follower = proxy.Write("Baza2.txt", "Sumadija", "Kragujevac", 2022, 4200);
+               Console.WriteLine(follower);
+               follower = proxy.Write("Baza2.txt", "Sumadija", "Beograd", 2022, 700);
+               Console.WriteLine(follower);
+
+
+
+               follower = proxy.ModifyData("Baza1.txt", 3, "Backa", "Sombor", 2022, 400);
+               Console.WriteLine(follower);
+               follower = proxy.ModifyData("Baza1.txt", 0, "Backa", "Novi Sad", 2022, 8000);
+               Console.WriteLine(follower);
+
+               follower = proxy.ArchiveDatabases("Baza1.txt");
+               Console.WriteLine(follower);
+               follower = proxy.ArchiveDatabases("Baza2.txt");
                Console.WriteLine(follower);
 
 

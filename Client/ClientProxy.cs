@@ -84,5 +84,40 @@ namespace Client
                 return e.Message;
             }
         }
+
+        public String ArchiveDatabases(String DatabaseName) 
+        {
+            string retstr = String.Empty;
+            try
+            {
+                retstr = factory.ArchiveDatabases(DatabaseName);
+                Console.WriteLine();
+                return retstr;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return e.Message;
+            }
+        }
+
+        public String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja)
+        {
+            string retstr = String.Empty;
+            try
+            {
+                retstr = factory.ModifyData(DatabaseName, id, region, grad, godina, potrosnja);
+                Console.WriteLine();
+                return retstr;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return e.Message;
+            }
+        }
+
+
+
     }
 }
