@@ -12,6 +12,7 @@ namespace Service
     public class ImplDatabaseManag : IDatabaseManagement
     {
         public static Dictionary<String, Dictionary<int, Data>> Databases = new Dictionary<string, Dictionary<int, Data>>();
+        public static List<String> ArchivedDatabases = new List<string>();
 
         public void CreateNewTxtFile(String txtFileName)
         {
@@ -41,6 +42,7 @@ namespace Service
             }
         }
 
+
         public String CreateDatabase(String DatabaseName)
         {
             if (!Databases.ContainsKey(DatabaseName))
@@ -69,7 +71,7 @@ namespace Service
                 FileStream stream = new FileStream(DatabaseName, FileMode.Open);
                 StreamReader sr = new StreamReader(stream);
                 string line;
-                List<Data> datas = new List<Data>();
+                List<modifiedData> datas = new List<modifiedData>();
                 int sumaPoGradu = 0;
                 int sumaPoRegionu = 0;
                 double brGr = 0;
@@ -77,12 +79,12 @@ namespace Service
                 double prosekPoGradu = 0;
                 double prosekPoRegionu = 0;
                 double max = 0;
-                Data maxPotrosac = new Data();
+                modifiedData maxPotrosac = new modifiedData();
                 //Uciitavanje reda iz baze i dodavanje u listu
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] tokens = line.Split(';');
-                    Data data = new Data(tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
+                    modifiedData data = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
                     datas.Add(data);
                 }
 
@@ -127,6 +129,8 @@ namespace Service
                         maxPotrosac = d;
                     }
                 }
+                sr.Close();
+                stream.Close();
 
                 return $"Prosek za region ({region}):{prosekPoRegionu}\nProsek za grad ({grad}):{prosekPoGradu}\nNajveci potrosac za region ({region}):\n{maxPotrosac}";
 
@@ -157,5 +161,91 @@ namespace Service
             }
 
         }
+
+        public String ArchiveDatabases(String DatabaseName)
+        {
+            if (Databases.ContainsKey(DatabaseName))
+            {
+                if (File.Exists("Archive.txt") == false) 
+                {
+                    CreateNewTxtFile("Archive.txt");
+                }
+
+                FileStream streamDb = new FileStream(DatabaseName, FileMode.Open);
+                StreamReader sr = new StreamReader(streamDb);
+                string line;
+                List<modifiedData> datas = new List<modifiedData>();
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] tokens = line.Split(';');
+                    modifiedData data = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
+                    datas.Add(data);
+                }
+
+                sr.Close();
+                streamDb.Close();
+
+                FileStream streamArch = new FileStream("Archive.txt", FileMode.Open);
+                streamArch.Seek(0, SeekOrigin.End);
+                StreamWriter sw = new StreamWriter(streamArch);
+
+                foreach (var d in datas)
+                {
+                    sw.WriteLine(d);
+                }
+
+                sw.Close();
+                streamArch.Close();
+
+                ArchivedDatabases.Add(DatabaseName);
+                DeleteDatabase(DatabaseName);
+
+                return $"Baza podataka sa imenom '{DatabaseName}' je uspesno arhivirana\n";
+            }
+            else return $"Baza podataka sa imenom '{DatabaseName}' ne postoji\n";
+        }
+
+       public String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja)
+        {
+            modifiedData data = new modifiedData(id, region, grad, godina, potrosnja);
+
+            if (Databases.ContainsKey(DatabaseName))
+            {
+                FileStream stream = new FileStream(DatabaseName, FileMode.Open);
+                StreamReader sr = new StreamReader(stream);
+                string line;
+                List<modifiedData> datas = new List<modifiedData>();
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] tokens = line.Split(';');
+                    modifiedData d = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
+                    datas.Add(d);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+                StreamWriter sw = new StreamWriter(stream);
+
+                foreach (var d in datas)
+                {
+                    if (d.Id == data.Id)
+                    {
+
+                        sw.WriteLine(data);
+
+                    }
+                    else
+                    {
+                        sw.WriteLine(d);
+                    }
+                }
+                sw.Close();
+                stream.Close();
+                return "Podaci su uspesno izmenjeni.\n";
+            }
+            return "Database not exists.\n";
+        }
+
     }
 }
