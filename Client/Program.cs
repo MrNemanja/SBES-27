@@ -37,6 +37,24 @@ namespace Client
                Console.WriteLine(follower);
                follower = proxy.DeleteDatabase("Baza2.txt");
                Console.WriteLine(follower);
+
+               follower = proxy.Write("Baza1.txt","Backa","Novi Sad",2022,400);
+               Console.WriteLine(follower);
+               follower = proxy.Write("Baza1.txt", "Backa", "Sombor", 2022, 5500);
+               Console.WriteLine(follower);
+               follower = proxy.Write("Baza1.txt", "Backa", "Novi Sad", 2022, 7700);
+               Console.WriteLine(follower);
+               follower = proxy.Write("Baza1.txt", "Srem", "Sombor", 2022, 400);
+               Console.WriteLine(follower);
+               follower = proxy.Write("Baza.txt", "sss", "asda", 2022, 0);
+               Console.WriteLine(follower);
+
+               follower = proxy.Read("Baza1.txt", "Backa", "Novi Sad");
+               Console.WriteLine(follower);
+               follower = proxy.Read("Baza.txt", "ss", "ss");
+               Console.WriteLine(follower);
+
+
             }
 
             Console.ReadLine();

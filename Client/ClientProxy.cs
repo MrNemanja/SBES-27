@@ -52,5 +52,37 @@ namespace Client
                 return e.Message;
             }
         }
+
+        public string Read(string DatabaseName, string region, string grad)
+        {
+            string retstr = String.Empty;
+            try
+            {
+                retstr = factory.Read(DatabaseName, region, grad);
+                Console.WriteLine();
+                return retstr;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return e.Message;
+            }
+        }
+
+        public string Write(string DatabaseName, string region, string grad, int godina, int potrosnja)
+        {
+            string retstr = String.Empty;
+            try
+            {
+                retstr = factory.Write(DatabaseName, region, grad,godina,potrosnja);
+                Console.WriteLine();
+                return retstr;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return e.Message;
+            }
+        }
     }
 }

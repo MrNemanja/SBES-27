@@ -8,20 +8,21 @@ namespace Contract
 {
    public class Data
    {
+        static int br = 0;
         private int id;
         private String region;
         private String grad;
         private int godina;
-        private double[] potrosnja;
+        private int potrosnja;
 
         public Data()
         {
 
         }
 
-        public Data(int id, string region, string grad, int godina, double[] potrosnja)
+        public Data(string region, string grad, int godina, int potrosnja)
         {
-            this.Id = id;
+            this.Id = br;
             this.Region = region;
             this.Grad = grad;
             this.Godina = godina;
@@ -32,6 +33,11 @@ namespace Contract
         public string Region { get => region; set => region = value; }
         public string Grad { get => grad; set => grad = value; }
         public int Godina { get => godina; set => godina = value; }
-        public double[] Potrosnja { get => potrosnja; set => potrosnja = value; }
+        public int Potrosnja { get => potrosnja; set => potrosnja = value; }
+
+        public override string ToString()
+        {
+            return $"{Id};{Region};{Grad};{Godina};{Potrosnja}";
+        }
     }
 }

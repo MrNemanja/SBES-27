@@ -1,0 +1,4 @@
+0;Backa;Novi Sad;2022;400
+0;Backa;Sombor;2022;5500
+0;Backa;Novi Sad;2022;7700
+0;Srem;Sombor;2022;400

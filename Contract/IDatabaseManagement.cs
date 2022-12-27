@@ -15,5 +15,10 @@ namespace Contract
 
         [OperationContract]
         String DeleteDatabase(String DatabaseName);
+        [OperationContract]
+        string Read(string DatabaseName,string region,string grad);
+        [OperationContract]
+        string Write(string DatabaseName, string region, string grad, int godina, int potrosnja);
+
     }
 }
