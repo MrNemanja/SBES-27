@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.ServiceModel;
 using Contract;
 using System.IO;
+using SecurityManager;
+using System.Security.Principal;
+using System.Security.Permissions;
+using System.Threading;
 
 namespace Service
 {
@@ -36,34 +40,41 @@ namespace Service
                 // Delete txt file
                 File.Delete(txtFileName);
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 Console.WriteLine(Ex.ToString());
             }
         }
 
-
         public String CreateDatabase(String DatabaseName)
         {
-            if (!Databases.ContainsKey(DatabaseName))
+            if (Thread.CurrentPrincipal.IsInRole("Create"))
             {
-                Databases.Add(DatabaseName, new Dictionary<int, Data>());
-                CreateNewTxtFile(DatabaseName);
-                return $"Baza podataka sa imenom '{DatabaseName}' je uspesno kreirana\n";
+                if (!Databases.ContainsKey(DatabaseName))
+                {
+                    Databases.Add(DatabaseName, new Dictionary<int, Data>());
+                    CreateNewTxtFile(DatabaseName);
+                    return $"Baza podataka sa imenom '{DatabaseName}' je uspesno kreirana\n";
+                }
+                else return $"Baza podataka sa imenom '{DatabaseName}' vec postoji\n";
             }
-            else return $"Baza podataka sa imenom '{DatabaseName}' vec postoji\n";
+            else return "Nemate pravo kreiranja baze podataka.\n";
         }
-
         public String DeleteDatabase(String DatabaseName)
         {
-            if (Databases.ContainsKey(DatabaseName))
+            if (Thread.CurrentPrincipal.IsInRole("Delete"))
             {
-                Databases.Remove(DatabaseName);
-                DeleteTxtFile(DatabaseName);
-                return $"Baza podataka sa imenom '{DatabaseName}' je uspesno obrisana\n";
+                if (Databases.ContainsKey(DatabaseName))
+                {
+                    Databases.Remove(DatabaseName);
+                    DeleteTxtFile(DatabaseName);
+                    return $"Baza podataka sa imenom '{DatabaseName}' je uspesno obrisana\n";
+                }
+                else return $"Baza podataka sa imenom '{DatabaseName}' ne postoji\n";
             }
-            else return $"Baza podataka sa imenom '{DatabaseName}' ne postoji\n";
+            else return "Nemate pravo brisanja baze podataka.\n";
         }
+
         public string Read(string DatabaseName, string region, string grad)
         {
             if (Databases.ContainsKey(DatabaseName))
@@ -142,7 +153,6 @@ namespace Service
             }
 
         }
-
         public string Write(string DatabaseName, string region, string grad, int godina, int potrosnja)
         {
             if (Databases.ContainsKey(DatabaseName))
@@ -164,49 +174,52 @@ namespace Service
 
         public String ArchiveDatabases(String DatabaseName)
         {
-            if (Databases.ContainsKey(DatabaseName))
+            if (Thread.CurrentPrincipal.IsInRole("Archive"))
             {
-                if (File.Exists("Archive.txt") == false) 
+                if (Databases.ContainsKey(DatabaseName))
                 {
-                    CreateNewTxtFile("Archive.txt");
+                    if (File.Exists("Archive.txt") == false)
+                    {
+                        CreateNewTxtFile("Archive.txt");
+                    }
+
+                    FileStream streamDb = new FileStream(DatabaseName, FileMode.Open);
+                    StreamReader sr = new StreamReader(streamDb);
+                    string line;
+                    List<modifiedData> datas = new List<modifiedData>();
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] tokens = line.Split(';');
+                        modifiedData data = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
+                        datas.Add(data);
+                    }
+
+                    sr.Close();
+                    streamDb.Close();
+
+                    FileStream streamArch = new FileStream("Archive.txt", FileMode.Open);
+                    streamArch.Seek(0, SeekOrigin.End);
+                    StreamWriter sw = new StreamWriter(streamArch);
+
+                    foreach (var d in datas)
+                    {
+                        sw.WriteLine(d);
+                    }
+
+                    sw.Close();
+                    streamArch.Close();
+
+                    ArchivedDatabases.Add(DatabaseName);
+                    DeleteDatabase(DatabaseName);
+
+                    return $"Baza podataka sa imenom '{DatabaseName}' je uspesno arhivirana\n";
                 }
-
-                FileStream streamDb = new FileStream(DatabaseName, FileMode.Open);
-                StreamReader sr = new StreamReader(streamDb);
-                string line;
-                List<modifiedData> datas = new List<modifiedData>();
-
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] tokens = line.Split(';');
-                    modifiedData data = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
-                    datas.Add(data);
-                }
-
-                sr.Close();
-                streamDb.Close();
-
-                FileStream streamArch = new FileStream("Archive.txt", FileMode.Open);
-                streamArch.Seek(0, SeekOrigin.End);
-                StreamWriter sw = new StreamWriter(streamArch);
-
-                foreach (var d in datas)
-                {
-                    sw.WriteLine(d);
-                }
-
-                sw.Close();
-                streamArch.Close();
-
-                ArchivedDatabases.Add(DatabaseName);
-                DeleteDatabase(DatabaseName);
-
-                return $"Baza podataka sa imenom '{DatabaseName}' je uspesno arhivirana\n";
+                else return $"Baza podataka sa imenom '{DatabaseName}' ne postoji\n";
             }
-            else return $"Baza podataka sa imenom '{DatabaseName}' ne postoji\n";
+            else return "Nemate pravo arhiviranja baze podataka.\n";
         }
-
-       public String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja)
+        public String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja)
         {
             modifiedData data = new modifiedData(id, region, grad, godina, potrosnja);
 

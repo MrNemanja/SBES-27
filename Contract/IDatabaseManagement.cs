@@ -25,5 +25,6 @@ namespace Contract
 
         [OperationContract]
         String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja);
+
     }
 }

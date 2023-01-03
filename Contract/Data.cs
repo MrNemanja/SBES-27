@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
+using System.Runtime.Serialization;
 
 namespace Contract
 {
+   [DataContract]
    public class Data
    {
         static int br = 0;
@@ -29,11 +32,15 @@ namespace Contract
             this.Potrosnja = potrosnja;
             br++;
         }
-
+        [DataMember]
         public int Id { get => id; set => id = value; }
+        [DataMember]
         public string Region { get => region; set => region = value; }
+        [DataMember]
         public string Grad { get => grad; set => grad = value; }
+        [DataMember]
         public int Godina { get => godina; set => godina = value; }
+        [DataMember]
         public int Potrosnja { get => potrosnja; set => potrosnja = value; }
 
         public override string ToString()
@@ -41,7 +48,7 @@ namespace Contract
             return $"{Id};{Region};{Grad};{Godina};{Potrosnja}";
         }
     }
-
+    [DataContract]
     public class modifiedData
     {
         private int id;
@@ -63,11 +70,15 @@ namespace Contract
             this.Godina = godina;
             this.Potrosnja = potrosnja;
         }
-
+        [DataMember]
         public int Id { get => id; set => id = value; }
+        [DataMember]
         public string Region { get => region; set => region = value; }
+        [DataMember]
         public string Grad { get => grad; set => grad = value; }
+        [DataMember]
         public int Godina { get => godina; set => godina = value; }
+        [DataMember]
         public int Potrosnja { get => potrosnja; set => potrosnja = value; }
 
         public override string ToString()
