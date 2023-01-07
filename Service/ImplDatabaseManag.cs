@@ -77,99 +77,106 @@ namespace Service
 
         public string Read(string DatabaseName, string region, string grad)
         {
-            if (Databases.ContainsKey(DatabaseName))
+            if (Thread.CurrentPrincipal.IsInRole("Read"))
             {
-                FileStream stream = new FileStream(DatabaseName, FileMode.Open);
-                StreamReader sr = new StreamReader(stream);
-                string line;
-                List<modifiedData> datas = new List<modifiedData>();
-                int sumaPoGradu = 0;
-                int sumaPoRegionu = 0;
-                double brGr = 0;
-                double brR = 0;
-                double prosekPoGradu = 0;
-                double prosekPoRegionu = 0;
-                double max = 0;
-                modifiedData maxPotrosac = new modifiedData();
-                //Uciitavanje reda iz baze i dodavanje u listu
-                while ((line = sr.ReadLine()) != null)
+                if (Databases.ContainsKey(DatabaseName))
                 {
-                    string[] tokens = line.Split(';');
-                    modifiedData data = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
-                    datas.Add(data);
-                }
-
-                //Prosek po regionu
-                foreach (var d in datas)
-                {
-                    if (d.Region.Equals(region))
+                    FileStream stream = new FileStream(DatabaseName, FileMode.Open);
+                    StreamReader sr = new StreamReader(stream);
+                    string line;
+                    List<modifiedData> datas = new List<modifiedData>();
+                    int sumaPoGradu = 0;
+                    int sumaPoRegionu = 0;
+                    double brGr = 0;
+                    double brR = 0;
+                    double prosekPoGradu = 0;
+                    double prosekPoRegionu = 0;
+                    double max = 0;
+                    modifiedData maxPotrosac = new modifiedData();
+                    //Uciitavanje reda iz baze i dodavanje u listu
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        sumaPoRegionu += d.Potrosnja;
-                        brR++;
+                        string[] tokens = line.Split(';');
+                        modifiedData data = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
+                        datas.Add(data);
                     }
-                }
-                if (!(sumaPoRegionu == 0 && brR == 0))
-                {
-                    prosekPoRegionu = sumaPoRegionu / brR;
-                }
 
-
-                //Prosek po gradu
-                foreach (var d in datas)
-                {
-
-                    if (d.Grad.Equals(grad))
+                    //Prosek po regionu
+                    foreach (var d in datas)
                     {
-                        sumaPoGradu += d.Potrosnja;
-                        brGr++;
-                    }
-                }
-                if (!(sumaPoGradu == 0 && brGr == 0))
-                {
-                    prosekPoGradu = sumaPoGradu / brGr;
-                }
-                //Pronalazak najveceg potrosaca za odredjeni region
-                foreach (var d in datas)
-                {
-                    if (d.Region.Equals(region))
-                    {
-                        if (d.Potrosnja > max)
+                        if (d.Region.Equals(region))
                         {
-                            max = d.Potrosnja;
+                            sumaPoRegionu += d.Potrosnja;
+                            brR++;
                         }
-                        maxPotrosac = d;
                     }
+                    if (!(sumaPoRegionu == 0 && brR == 0))
+                    {
+                        prosekPoRegionu = sumaPoRegionu / brR;
+                    }
+
+
+                    //Prosek po gradu
+                    foreach (var d in datas)
+                    {
+
+                        if (d.Grad.Equals(grad))
+                        {
+                            sumaPoGradu += d.Potrosnja;
+                            brGr++;
+                        }
+                    }
+                    if (!(sumaPoGradu == 0 && brGr == 0))
+                    {
+                        prosekPoGradu = sumaPoGradu / brGr;
+                    }
+                    //Pronalazak najveceg potrosaca za odredjeni region
+                    foreach (var d in datas)
+                    {
+                        if (d.Region.Equals(region))
+                        {
+                            if (d.Potrosnja > max)
+                            {
+                                max = d.Potrosnja;
+                            }
+                            maxPotrosac = d;
+                        }
+                    }
+                    sr.Close();
+                    stream.Close();
+
+                    return $"Prosek za region ({region}):{prosekPoRegionu}\nProsek za grad ({grad}):{prosekPoGradu}\nNajveci potrosac za region ({region}):\n{maxPotrosac}";
+
+
                 }
-                sr.Close();
-                stream.Close();
-
-                return $"Prosek za region ({region}):{prosekPoRegionu}\nProsek za grad ({grad}):{prosekPoGradu}\nNajveci potrosac za region ({region}):\n{maxPotrosac}";
-
-
+                else
+                {
+                    return $"Baza:{DatabaseName} ne postoji";
+                }
             }
-            else
-            {
-                return $"Baza:{DatabaseName} ne postoji";
-            }
-
+            else return "Nemate pravo citanja baze podataka.\n";
         }
         public string Write(string DatabaseName, string region, string grad, int godina, int potrosnja)
         {
-            if (Databases.ContainsKey(DatabaseName))
+            if (Thread.CurrentPrincipal.IsInRole("Write"))
             {
-                Data data = new Data(region, grad, godina, potrosnja);
-                FileStream stream = new FileStream(DatabaseName, FileMode.Append);
-                StreamWriter sw = new StreamWriter(stream);
-                sw.WriteLine(data);
-                sw.Close();
-                stream.Close();
-                return $"Upis u bazu:{DatabaseName} je uspesno odradjen";
-            }
-            else
-            {
-                return $"Baza:{DatabaseName} ne postoji";
-            }
 
+                if (Databases.ContainsKey(DatabaseName))
+                {
+                    Data data = new Data(region, grad, godina, potrosnja);
+                    FileStream stream = new FileStream(DatabaseName, FileMode.Append);
+                    StreamWriter sw = new StreamWriter(stream);
+                    sw.WriteLine(data);
+                    sw.Close();
+                    stream.Close();
+                    return $"Upis u bazu:{DatabaseName} je uspesno odradjen";
+                }
+                else
+                {
+                    return $"Baza:{DatabaseName} ne postoji";
+                }
+            }
+            else return "Nemate pravo pisanja u bazu podataka.\n";
         }
 
         public String ArchiveDatabases(String DatabaseName)
@@ -221,43 +228,47 @@ namespace Service
         }
         public String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja)
         {
-            modifiedData data = new modifiedData(id, region, grad, godina, potrosnja);
-
-            if (Databases.ContainsKey(DatabaseName))
+            if (Thread.CurrentPrincipal.IsInRole("Modify"))
             {
-                FileStream stream = new FileStream(DatabaseName, FileMode.Open);
-                StreamReader sr = new StreamReader(stream);
-                string line;
-                List<modifiedData> datas = new List<modifiedData>();
+                modifiedData data = new modifiedData(id, region, grad, godina, potrosnja);
 
-                while ((line = sr.ReadLine()) != null)
+                if (Databases.ContainsKey(DatabaseName))
                 {
-                    string[] tokens = line.Split(';');
-                    modifiedData d = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
-                    datas.Add(d);
-                }
+                    FileStream stream = new FileStream(DatabaseName, FileMode.Open);
+                    StreamReader sr = new StreamReader(stream);
+                    string line;
+                    List<modifiedData> datas = new List<modifiedData>();
 
-                stream.Seek(0, SeekOrigin.Begin);
-                StreamWriter sw = new StreamWriter(stream);
-
-                foreach (var d in datas)
-                {
-                    if (d.Id == data.Id)
+                    while ((line = sr.ReadLine()) != null)
                     {
-
-                        sw.WriteLine(data);
-
+                        string[] tokens = line.Split(';');
+                        modifiedData d = new modifiedData(int.Parse(tokens[0]), tokens[1], tokens[2], int.Parse(tokens[3]), int.Parse(tokens[4]));
+                        datas.Add(d);
                     }
-                    else
+
+                    stream.Seek(0, SeekOrigin.Begin);
+                    StreamWriter sw = new StreamWriter(stream);
+
+                    foreach (var d in datas)
                     {
-                        sw.WriteLine(d);
+                        if (d.Id == data.Id)
+                        {
+
+                            sw.WriteLine(data);
+
+                        }
+                        else
+                        {
+                            sw.WriteLine(d);
+                        }
                     }
+                    sw.Close();
+                    stream.Close();
+                    return "Podaci su uspesno izmenjeni.\n";
                 }
-                sw.Close();
-                stream.Close();
-                return "Podaci su uspesno izmenjeni.\n";
+                return "Database not exists.\n";
             }
-            return "Database not exists.\n";
+            else return "Nemate pravo izmene baze podataka.\n";
         }
 
     }

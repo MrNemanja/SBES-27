@@ -1,0 +1,8 @@
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\bin\Debug\SecurityManager.dll
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\bin\Debug\SecurityManager.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.csproj.AssemblyReference.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.RolesConfigFile.resources
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.csproj.GenerateResource.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.csproj.CoreCompileInputs.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.dll
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.pdb

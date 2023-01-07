@@ -4,3 +4,9 @@ C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.csp
 C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.csproj.CoreCompileInputs.cache
 C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.dll
 C:\Users\Nebojsa\source\repos\DatabaseManagement\Contract\obj\Debug\Contract.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Contract\bin\Debug\Contract.dll
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Contract\bin\Debug\Contract.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Contract\obj\Debug\Contract.csproj.AssemblyReference.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Contract\obj\Debug\Contract.csproj.CoreCompileInputs.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Contract\obj\Debug\Contract.dll
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Contract\obj\Debug\Contract.pdb

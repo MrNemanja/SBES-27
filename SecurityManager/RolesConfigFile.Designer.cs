@@ -61,7 +61,7 @@ namespace SecurityManager {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create, Archive, Delete.
+        ///   Looks up a localized string similar to Create,Archive,Delete.
         /// </summary>
         internal static string Admin {
             get {
