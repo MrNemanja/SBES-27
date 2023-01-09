@@ -1,0 +1,15 @@
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\ReserveService.exe.config
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\ReserveService.exe
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\ReserveService.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\Contract.dll
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\SecurityManager.dll
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\Service.exe
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\Contract.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\SecurityManager.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\Service.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\bin\Debug\Service.exe.config
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\obj\Debug\ReserveService.csproj.AssemblyReference.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\obj\Debug\ReserveService.csproj.CoreCompileInputs.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\obj\Debug\ReserveService.csproj.CopyComplete
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\obj\Debug\ReserveService.exe
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\ReserveService\obj\Debug\ReserveService.pdb

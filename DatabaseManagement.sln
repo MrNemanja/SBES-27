@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityManager", "SecurityManager\SecurityManager.csproj", "{005BBBF9-E32B-4C21-B24A-8B26EB597A59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Replicator", "Replicator\Replicator.csproj", "{254899B2-DBC1-4D0E-825D-7906DEC3129F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReserveService", "ReserveService\ReserveService.csproj", "{5BE13F23-8A85-4918-80D7-234D14A5485F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{005BBBF9-E32B-4C21-B24A-8B26EB597A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{005BBBF9-E32B-4C21-B24A-8B26EB597A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{005BBBF9-E32B-4C21-B24A-8B26EB597A59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{254899B2-DBC1-4D0E-825D-7906DEC3129F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{254899B2-DBC1-4D0E-825D-7906DEC3129F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{254899B2-DBC1-4D0E-825D-7906DEC3129F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{254899B2-DBC1-4D0E-825D-7906DEC3129F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BE13F23-8A85-4918-80D7-234D14A5485F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE13F23-8A85-4918-80D7-234D14A5485F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE13F23-8A85-4918-80D7-234D14A5485F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE13F23-8A85-4918-80D7-234D14A5485F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,10 @@
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\bin\Debug\Replicator.exe.config
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\bin\Debug\Replicator.exe
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\bin\Debug\Replicator.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\bin\Debug\Contract.dll
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\bin\Debug\Contract.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\obj\Debug\Replicator.csproj.AssemblyReference.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\obj\Debug\Replicator.csproj.CoreCompileInputs.cache
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\obj\Debug\Replicator.csproj.CopyComplete
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\obj\Debug\Replicator.exe
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\Replicator\obj\Debug\Replicator.pdb

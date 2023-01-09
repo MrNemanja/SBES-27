@@ -26,5 +26,15 @@ namespace Contract
         [OperationContract]
         String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja);
 
+        [OperationContract]
+        Dictionary<String, Dictionary<int, Data>> ReadData();
+
+        [OperationContract]
+        void WriteData(Dictionary<String, Dictionary<int, Data>> data);
+
+
+
+
+
     }
 }

@@ -13,7 +13,7 @@ namespace Client
         static void Main(string[] args)
         {
             NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:9999/Service";
+            string address = "net.tcp://localhost:9999/IDatabaseManagement";
             String follower = String.Empty;
 
             binding.Security.Mode = SecurityMode.Transport;

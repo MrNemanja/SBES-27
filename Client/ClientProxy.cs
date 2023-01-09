@@ -117,6 +117,33 @@ namespace Client
             }
         }
 
-        
+        public Dictionary<string, Dictionary<int, Data>> ReadData()
+        {
+            Dictionary<String, Dictionary<int, Data>> data = new Dictionary<string, Dictionary<int, Data>>();
+            try
+            {
+                data = factory.ReadData();
+                Console.WriteLine();
+                return data;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return null;
+            }
+        }
+
+        public void WriteData(Dictionary<string, Dictionary<int, Data>> data)
+        {
+            try
+            {
+                factory.WriteData(data);
+                Console.WriteLine();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
     }
 }

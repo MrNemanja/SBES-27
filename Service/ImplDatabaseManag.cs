@@ -271,5 +271,35 @@ namespace Service
             else return "Nemate pravo izmene baze podataka.\n";
         }
 
+        public Dictionary<string, Dictionary<int, Data>> ReadData()
+        {
+            Dictionary<String, Dictionary<int, Data>> data = new Dictionary<string, Dictionary<int, Data>>();
+            Dictionary<int, Data> values = new Dictionary<int, Data>();
+
+            foreach(String name in Databases.Keys)
+            {
+                foreach(int index in Databases[name].Keys)
+                {
+                    values.Add(index, Databases[name][index]);
+                    data.Add(name, values);
+                }
+            }
+
+            return data;
+        }
+
+        public void WriteData(Dictionary<String, Dictionary<int, Data>> data)
+        {
+            foreach(String name in data.Keys)
+            {
+                foreach (int index in data[name].Keys)
+                {
+                    Databases[name].Add(index, data[name][index]);
+                    Databases.Add(name, Databases[name]);
+                }
+            }
+
+            Console.WriteLine("Podaci replicirani.");
+        }
     }
 }
