@@ -54,9 +54,10 @@ namespace Client
                follower = proxy.Write("Baza2.txt", "Sumadija", "Beograd", 2022, 700);
                Console.WriteLine(follower);
 
+               follower = proxy.Read("Baza1.txt", "Backa", "Novi Sad");
+               Console.WriteLine(follower);
 
-
-               follower = proxy.ModifyData("Baza1.txt", 3, "Backa", "Sombor", 2022, 400);
+                follower = proxy.ModifyData("Baza1.txt", 3, "Backa", "Sombor", 2022, 400);
                Console.WriteLine(follower);
                follower = proxy.ModifyData("Baza1.txt", 0, "Backa", "Novi Sad", 2022, 8000);
                Console.WriteLine(follower);

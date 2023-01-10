@@ -1,0 +1,21 @@
+0;Backa;Novi Sad;2022;8000
+1;Backa;Sombor;2022;5500
+2;Backa;Novi Sad;2022;7700
+3;Backa;Sombor;2022;400
+4;Sumadija;Lazarevac;2022;1500
+5;Sumadija;Kragujevac;2022;4200
+6;Sumadija;Beograd;2022;700
+0;Backa;Novi Sad;2022;8000
+1;Backa;Sombor;2022;5500
+2;Backa;Novi Sad;2022;7700
+3;Backa;Sombor;2022;400
+4;Sumadija;Lazarevac;2022;1500
+5;Sumadija;Kragujevac;2022;4200
+6;Sumadija;Beograd;2022;700
+0;Backa;Novi Sad;2022;8000
+1;Backa;Sombor;2022;5500
+2;Backa;Novi Sad;2022;7700
+3;Backa;Sombor;2022;400
+4;Sumadija;Lazarevac;2022;1500
+5;Sumadija;Kragujevac;2022;4200
+6;Sumadija;Beograd;2022;700

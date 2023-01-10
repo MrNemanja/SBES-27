@@ -48,8 +48,13 @@ namespace Service
 
         public String CreateDatabase(String DatabaseName)
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
             if (Thread.CurrentPrincipal.IsInRole("Create"))
             {
+                Audit.AuthorizationSuccess(userName, OperationContext.Current.IncomingMessageHeaders.Action);
+
                 if (!Databases.ContainsKey(DatabaseName))
                 {
                     Databases.Add(DatabaseName, new Dictionary<int, Data>());
@@ -58,12 +63,31 @@ namespace Service
                 }
                 else return $"Baza podataka sa imenom '{DatabaseName}' vec postoji\n";
             }
-            else return "Nemate pravo kreiranja baze podataka.\n";
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                       OperationContext.Current.IncomingMessageHeaders.Action, "Create method need Admin permission.");
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+
+                throw new FaultException("User " + userName + " try to call Create method. Create method need  Admin permission.");
+               
+            }
         }
         public String DeleteDatabase(String DatabaseName)
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
             if (Thread.CurrentPrincipal.IsInRole("Delete"))
             {
+                Audit.AuthorizationSuccess(userName, OperationContext.Current.IncomingMessageHeaders.Action);
+
                 if (Databases.ContainsKey(DatabaseName))
                 {
                     Databases.Remove(DatabaseName);
@@ -72,13 +96,33 @@ namespace Service
                 }
                 else return $"Baza podataka sa imenom '{DatabaseName}' ne postoji\n";
             }
-            else return "Nemate pravo brisanja baze podataka.\n";
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                       OperationContext.Current.IncomingMessageHeaders.Action, "Delete method need Admin permission.");
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+
+
+                throw new FaultException("User " + userName + " try to call Delete method. Delete method need  Admin permission.");
+                
+            }
         }
 
         public string Read(string DatabaseName, string region, string grad)
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
             if (Thread.CurrentPrincipal.IsInRole("Read"))
             {
+                Audit.AuthorizationSuccess(userName, OperationContext.Current.IncomingMessageHeaders.Action);
                 if (Databases.ContainsKey(DatabaseName))
                 {
                     FileStream stream = new FileStream(DatabaseName, FileMode.Open);
@@ -154,12 +198,32 @@ namespace Service
                     return $"Baza:{DatabaseName} ne postoji";
                 }
             }
-            else return "Nemate pravo citanja baze podataka.\n";
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                       OperationContext.Current.IncomingMessageHeaders.Action, "Read method need Reader permission.");
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+
+
+                throw new FaultException("User " + userName + " try to call Read method. Read method need  Reader permission.");
+               
+            }
         }
         public string Write(string DatabaseName, string region, string grad, int godina, int potrosnja)
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
             if (Thread.CurrentPrincipal.IsInRole("Write"))
             {
+                Audit.AuthorizationSuccess(userName, OperationContext.Current.IncomingMessageHeaders.Action);
 
                 if (Databases.ContainsKey(DatabaseName))
                 {
@@ -176,13 +240,34 @@ namespace Service
                     return $"Baza:{DatabaseName} ne postoji";
                 }
             }
-            else return "Nemate pravo pisanja u bazu podataka.\n";
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                       OperationContext.Current.IncomingMessageHeaders.Action, "Write method need Writer permission.");
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+
+
+                throw new FaultException("User " + userName + " try to call Write method. Write method need  Writer permission.");
+                
+            }
         }
 
         public String ArchiveDatabases(String DatabaseName)
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
             if (Thread.CurrentPrincipal.IsInRole("Archive"))
             {
+                Audit.AuthorizationSuccess(userName, OperationContext.Current.IncomingMessageHeaders.Action);
+
                 if (Databases.ContainsKey(DatabaseName))
                 {
                     if (File.Exists("Archive.txt") == false)
@@ -224,12 +309,33 @@ namespace Service
                 }
                 else return $"Baza podataka sa imenom '{DatabaseName}' ne postoji\n";
             }
-            else return "Nemate pravo arhiviranja baze podataka.\n";
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                       OperationContext.Current.IncomingMessageHeaders.Action, "Archive method need Admin permission.");
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+
+
+                throw new FaultException("User " + userName + " try to call Archive method. Archive method need  Admin permission.");
+                
+            }
         }
         public String ModifyData(String DatabaseName, int id, string region, string grad, int godina, int potrosnja)
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string userName = Formatter.ParseName(principal.Identity.Name);
+
             if (Thread.CurrentPrincipal.IsInRole("Modify"))
             {
+                Audit.AuthorizationSuccess(userName, OperationContext.Current.IncomingMessageHeaders.Action);
+
                 modifiedData data = new modifiedData(id, region, grad, godina, potrosnja);
 
                 if (Databases.ContainsKey(DatabaseName))
@@ -268,7 +374,23 @@ namespace Service
                 }
                 return "Database not exists.\n";
             }
-            else return "Nemate pravo izmene baze podataka.\n";
+            else
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(userName,
+                       OperationContext.Current.IncomingMessageHeaders.Action, "Modify method need Writer permission.");
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine(e.Message);
+                }
+
+
+                throw new FaultException("User " + userName + " try to call Modify method. Modify method need  Writer permission.");
+                
+            }
         }
 
         public Dictionary<string, Dictionary<int, Data>> ReadData()

@@ -31,6 +31,11 @@ namespace Client
                 Console.WriteLine();
                 return retstr;
             }
+            catch (FaultException e)
+            {
+                Console.WriteLine("Error while trying to Create. Error message: {0}", e.Message);
+                return "";
+            }
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
@@ -45,6 +50,11 @@ namespace Client
             {
                 retstr = factory.DeleteDatabase(DatabaseName);
                 return retstr;
+            }
+            catch (FaultException e)
+            {
+                Console.WriteLine("Error while trying to Delete. Error message: {0}", e.Message);
+                return "";
             }
             catch (Exception e)
             {
@@ -62,6 +72,11 @@ namespace Client
                 Console.WriteLine();
                 return retstr;
             }
+            catch (FaultException e)
+            {
+                Console.WriteLine("Error while trying to Read. Error message: {0}", e.Message);
+                return "";
+            }
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
@@ -77,6 +92,11 @@ namespace Client
                 retstr = factory.Write(DatabaseName, region, grad,godina,potrosnja);
                 Console.WriteLine();
                 return retstr;
+            }
+            catch (FaultException e)
+            {
+                Console.WriteLine("Error while trying to Write. Error message: {0}", e.Message);
+                return "";
             }
             catch (Exception e)
             {
@@ -94,6 +114,11 @@ namespace Client
                 Console.WriteLine();
                 return retstr;
             }
+            catch (FaultException e)
+            {
+                Console.WriteLine("Error while trying to Archive. Error message: {0}", e.Message);
+                return "";
+            }
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
@@ -109,6 +134,11 @@ namespace Client
                 retstr = factory.ModifyData(DatabaseName, id, region, grad, godina, potrosnja);
                 Console.WriteLine();
                 return retstr;
+            }
+            catch (FaultException e)
+            {
+                Console.WriteLine("Error while trying to Modify. Error message: {0}", e.Message);
+                return "";
             }
             catch (Exception e)
             {
