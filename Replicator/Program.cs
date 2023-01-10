@@ -13,6 +13,8 @@ namespace Replicator
     {
         static void Main(string[] args)
         {
+            Dictionary<String, Dictionary<int, Data>> repdata = new Dictionary<string, Dictionary<int, Data>>();
+
             while (true)
             {
                 try
@@ -22,6 +24,7 @@ namespace Replicator
                     IDatabaseManagement kSource = cfSource.CreateChannel();
                     IDatabaseManagement kDestination = cfDestination.CreateChannel();
 
+                    repdata = kSource.ReadData();
                     Dictionary<String, Dictionary<int, Data>> data = kSource.ReadData();
                     kDestination.WriteData(data);
 
