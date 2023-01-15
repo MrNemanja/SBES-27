@@ -6,3 +6,4 @@ C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityMana
 C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.csproj.CoreCompileInputs.cache
 C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.dll
 C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.pdb
+C:\Users\Nebojsa\Documents\GitHub\SBES-27\SecurityManager\obj\Debug\SecurityManager.AuditEventFile.resources
