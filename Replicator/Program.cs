@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Contract;
 using System.ServiceModel;
 using System.Threading;
+using System.Security.Principal;
+using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security;
+using SecurityManager;
 
 namespace Replicator
 {
@@ -21,6 +25,20 @@ namespace Replicator
                 {
                     ChannelFactory<IDatabaseManagement> cfSource = new ChannelFactory<IDatabaseManagement>("Source");
                     ChannelFactory<IDatabaseManagement> cfDestination = new ChannelFactory<IDatabaseManagement>("Destination");
+
+                    cfDestination.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
+                    cfDestination.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new ClientCertValidator();
+                    cfDestination.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+                    cfDestination.Credentials.ClientCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "wcfclient");
+
+
+                    cfSource.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
+                    cfSource.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
+                    cfSource.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+                    cfSource.Credentials.ClientCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "wcfservice");
+
+
+
                     IDatabaseManagement kSource = cfSource.CreateChannel();
                     IDatabaseManagement kDestination = cfDestination.CreateChannel();
 
